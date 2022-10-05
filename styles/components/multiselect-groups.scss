@@ -1,0 +1,152 @@
+.input-multiselect {
+  min-width: 200px;
+  position: relative;
+  border: 1px solid #dbdedf;
+  border-radius: 3px;
+  font-size: 15px;
+  min-height: 36px;
+  box-sizing: border-box;
+  color: #313942;
+  background: #fff;
+  cursor: pointer;
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: default;
+
+    .selected-value-button {
+      cursor: default;
+    }
+
+    .selected-value-button:hover {
+      color: #878787;
+    }
+  }
+
+  &--selected {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 8px 9px 7px;
+    gap: 5px;
+  }
+
+  &--placeholder {
+    color: #b2b2b2;
+  }
+
+  &--list {
+    width: 100%;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    border: 1px solid #dbdedf;
+    border-radius: 3px;
+    background-color: #fff;
+    z-index: 9999;
+
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 0;
+      z-index: 99999;
+      border-style: solid;
+      border-color: #dbdedf transparent;
+      border-width: 0 4px 4px;
+      top: -5px;
+      left: 50%;
+      margin-left: -10px;
+    }
+  }
+
+  &--list-container {
+    max-height: 200px;
+    overflow: hidden;
+    overflow-y: auto;
+
+    &__group {
+      button {
+        width: 100%;
+        border: none;
+        background: none;
+        padding: 10px;
+        text-align: left;
+        font-size: 15px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #dbdedf;
+        }
+      }
+
+      ul {
+        position: relative;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li {
+          padding: 5px 20px;
+
+          &:hover {
+            background-color: #efefef;
+          }
+        }
+      }
+    }
+  }
+
+  .selected-value {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    flex: 1 1 auto;
+    padding: 2px 4px 2px 8px;
+    border: 1px solid #dbdedf;
+    border-radius: 4px;
+    overflow: hidden;
+
+    &--text {
+      width: 100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+
+      &:hover {
+        white-space: normal;
+        overflow: auto;
+      }
+    }
+
+    &--btn-container {
+      display: flex;
+      margin-left: 5px;
+    }
+
+    &-button {
+      margin-top: 3px;
+      border: none;
+      background: none;
+      padding: 0;
+      line-height: 0;
+      font-size: 25px;
+      color: #878787;
+      cursor: pointer;
+
+      &:hover {
+        color: #343434;
+      }
+    }
+  }
+
+  .selected::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    width: 7px;
+    height: 7px;
+    margin-top: 6px;
+    border-radius: 50%;
+    background-color: #00ac06;
+  }
+}

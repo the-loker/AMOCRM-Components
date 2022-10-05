@@ -1,0 +1,66 @@
+{# 
+  name - string - Name инпута для использования в форме
+  items - array of objects - Массив со значениями селекта
+  selected - json string of array - Массив со значениями селекта в json строке
+  disabled - boolean - Неактивность
+  placeholder - string - Плэйсхолдер
+#}
+
+<div class="input-multiselect js-component-multiselect-groups" {{ disabled ? 'disabled' : '' }}>
+  <input class="js-component-multiselect-groups-value" name="{{ name ? name : '' }}" type="hidden" value="{{ selected|length > 0 ? selected|join(',') : '' }}">
+  <div class="input-multiselect--selected js-component-multiselect--values">
+    <div class="input-multiselect--placeholder {{ selected|length > 0 ? 'hidden' : '' }} ">{{ placeholder ? placeholder : 'Выбрать...' }}</div>
+    {% if selected|length > 0 %}
+      {% for i in selected %}
+        {% set name = false %}
+
+        {% for item in items %}
+          {% for el in item.items %}
+            {% if el.id == i %}
+              {% set name = el.option %}
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+
+        <div data-id="{{ i }}" class="selected-value">
+          <div class="selected-value--text">{{ name ? name : 'Not found' }}</div>
+          <div class="selected-value--btn-container">
+            <button
+              class="selected-value-button js-component-multiselect-groups--remove"
+              type="button"
+            >&times;</button>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+  <div class="input-multiselect--list js-component-multiselect-groups-list hidden">
+    <div class="input-multiselect--list-container">
+      {% if items|length > 0%}
+        {% for g in items %}
+          <div class="input-multiselect--list-container__group js-component-multiselect--group">
+            <button class="js-component-multiselect--select-group" type="button" data-selected="false">{{ g.group }}</button>
+            <ul>
+              {% for item in g.items %}
+                {% if selected|length > 0 %}
+                  {% set is_selected = false %}
+                  {% for s in selected %}
+                    {% if s == item.id %}
+                      {% set is_selected = true %}
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+                <li
+                  data-value="{{ item.id }}"
+                  class="js-component-multiselect--group-item {{ is_selected ? 'selected' : '' }}"
+                >{{ item.option }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p style="padding: 10px;">Значение не переданы.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
