@@ -1,0 +1,25 @@
+{
+  "widget": {
+    "name": "widget.name",
+    "description": "widget.description",
+    "short_description": "widget.short_description",
+    "version": "0.0.23",
+    "interface_version": 2,
+    "init_once": false,
+    "locale": [
+      "ru"
+    ],
+    "installation": true
+  },
+  "locations": [
+    "settings"
+  ],
+  "settings": {
+    "w_settings": {
+      "id": "w_settings",
+      "name": "settings.w_settings",
+      "type": "text",
+      "required": false
+    }
+  }
+}
