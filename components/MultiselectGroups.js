@@ -308,14 +308,22 @@ define([], function() {
       window.addEventListener('resize', this.resize.bind(this));
       document.addEventListener('click', this.select.bind(this));
       document.addEventListener('click', this.showList.bind(this));
+
+      // Фикс для AMOCRM
+      document.addEventListener('mouseup', this.showList.bind(this));
+
       document.addEventListener('click', this.removeSelectedValue.bind(this));
       document.addEventListener('component:change', this.change.bind(this));
     }
 
     destroyHandlers() {
       window.removeEventListener('resize', this.resize);
-      document.removeEventListener('click', this.showList);
       document.removeEventListener('click', this.select);
+      document.removeEventListener('click', this.showList);
+
+      // Фикс для AMOCRM
+      document.removeEventListener('mouseup', this.showList);
+      
       document.removeEventListener('click', this.removeSelectedValue);
       document.removeEventListener('component:change', this.change);
     }
