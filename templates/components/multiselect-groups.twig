@@ -38,8 +38,23 @@
     <div class="input-multiselect--list-container">
       {% if items|length > 0%}
         {% for g in items %}
+          {% set is_selectedGroup = 'false' %}
+          {% set itemsLength = g.items|length %}
+          {% set selectedItems = 0 %}
+          {% for item in g.items %}
+            {% if selected|length > 0 %}
+              {% for s in selected %}
+                {% if s == item.id %}
+                  {% set selectedItems = selectedItems + 1 %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+          {% if itemsLength == selectedItems %}
+            {% set is_selectedGroup = 'true' %}
+          {% endif %}
           <div class="input-multiselect--list-container__group js-component-multiselect--group">
-            <button class="js-component-multiselect--select-group" type="button" data-selected="false">{{ g.group }}</button>
+            <button class="js-component-multiselect--select-group" type="button" data-selected="{{ is_selectedGroup }}">{{ g.group }}</button>
             <ul>
               {% for item in g.items %}
                 {% if selected|length > 0 %}
