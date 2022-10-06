@@ -158,15 +158,18 @@ define([], function() {
       if(!component) return;
 
       const valueInput = component.querySelector(this.valueInput);
-      const values = valueInput.value.split(',');
-
+      const values = valueInput.value ? valueInput.value.split(',') : '';
       const items = component.querySelectorAll('li[data-value]');
 
       items.forEach((item) => {
         const val = item.getAttribute('data-value');
 
-        if(values.includes(val)) {
-          item.classList.add('selected');
+        if(!values) {
+          item.classList.remove('selected');
+        } else {
+          if(values.includes(val)) {
+            item.classList.add('selected');
+          }
         }
       });
 
@@ -218,7 +221,7 @@ define([], function() {
         placeholder.classList.remove('hidden');
       }
 
-      input.setAttribute('value', values.join(','));
+      input.setAttribute('value', values ? values.join(',') : '');
 
       this.trigger('change', valueInput);
     }
