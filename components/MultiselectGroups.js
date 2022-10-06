@@ -219,6 +219,8 @@ define([], function() {
       }
 
       input.setAttribute('value', values.join(','));
+
+      this.trigger('change', valueInput);
     }
 
     removeSelectedValue(e) {
@@ -302,6 +304,12 @@ define([], function() {
       elems.forEach(elem => {
         this.setPosition(elem, elem.offsetHeight);
       });
+    }
+
+    trigger(event, element) {
+      const trigger = new Event(event, { bubbles: true });
+
+      element.dispatchEvent(trigger);
     }
 
     initHandlers() {
