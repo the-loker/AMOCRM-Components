@@ -115,6 +115,10 @@ define([], function() {
         return;
       }
 
+      if(e.target.closest(this.elemList)) {
+        return;
+      }
+
       const elems = document.querySelectorAll(this.elem);
       const component = e.target.closest(this.elem);
 
@@ -149,13 +153,13 @@ define([], function() {
         }
       });
 
+      if(e.type == 'mouseup') return;
+
       const currentList = component.querySelector(this.elemList);
 
-      if(currentList.classList.contains('hidden')) {
-        currentList.classList.remove('hidden');
+      currentList.classList.toggle('hidden');
 
-        this.setPosition(component, component.offsetHeight);
-      }
+      this.setPosition(component, component.offsetHeight);
     }
 
     change(e) {
