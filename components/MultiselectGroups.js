@@ -88,6 +88,9 @@ define([], function() {
 
           this.setValue(component, value);
 
+          // Установка позиции выпадающего списка
+          this.setPosition(component, component.offsetHeight);
+
           return;
         }
 
@@ -97,6 +100,9 @@ define([], function() {
         const value = this.getValues(items);
 
         this.setValue(component, value);
+
+        // Установка позиции выпадающего списка
+        this.setPosition(component, component.offsetHeight);
 
         return;
       }
