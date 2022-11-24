@@ -12,6 +12,12 @@ define([], function() {
       this.valueInput = '.js-component-multiselect-groups-value';
       this.placeholder = '.input-multiselect--placeholder';
       this.removeValue = '.js-component-multiselect-groups--remove';
+
+      this.showList = this.showList.bind(this);
+      this.select = this.select.bind(this);
+      this.change = this.change.bind(this);
+      this.resize = this.resize.bind(this);
+      this.removeSelectedValue = this.removeSelectedValue.bind(this);
     }
 
     select(e) {
@@ -328,15 +334,15 @@ define([], function() {
     }
 
     initHandlers() {
-      window.addEventListener('resize', this.resize.bind(this));
-      document.addEventListener('click', this.select.bind(this));
-      document.addEventListener('click', this.showList.bind(this));
+      window.addEventListener('resize', this.resize);
+      document.addEventListener('click', this.select);
+      document.addEventListener('click', this.showList);
 
       // Фикс для AMOCRM
-      document.addEventListener('mouseup', this.showList.bind(this));
+      document.addEventListener('mouseup', this.showList);
 
-      document.addEventListener('click', this.removeSelectedValue.bind(this));
-      document.addEventListener('component:change', this.change.bind(this));
+      document.addEventListener('click', this.removeSelectedValue);
+      document.addEventListener('component:change', this.change);
     }
 
     destroyHandlers() {
