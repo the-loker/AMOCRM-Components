@@ -179,6 +179,8 @@ define([], function() {
         } else {
           if(values.includes(val)) {
             item.classList.add('selected');
+          } else {
+            item.classList.remove('selected');
           }
         }
       });
