@@ -1,10 +1,12 @@
 define([
   'jquery',
   './components/MultiselectGroups.js?v=' + Date.now(),
-], function($, MultiselectGroups) {
+  './components/Multiselect.js?v=' + Date.now(),
+], function($, MultiselectGroups, Multiselect) {
   return function() {
     const self = this;
 
+    self.Multiselect = new Multiselect();
     self.MultiselectGroups = new MultiselectGroups();
 
     function getTemplateAsync(template) {
@@ -40,9 +42,22 @@ define([
       settings: async () => {
         const settings = self.get_settings();
 
-        initStyle(settings, 'components/components');
-        
+        initStyle(settings, 'components/style');
+
         const items = [
+          { id: '1', option: 'Option 1' },
+          { id: '2', option: 'Option 2' },
+          { id: '3', option: 'Option 3' },
+          { id: '4', option: 'Option 4' },
+          { id: '5', option: 'Option 5' },
+          { id: '6', option: 'Option 6' },
+          { id: '7', option: 'Option 7' },
+          { id: '8', option: 'Option 8' },
+          { id: '9', option: 'Option 9' },
+          { id: '10', option: 'Option 10' },
+        ];
+        
+        const itemsGroups = [
           {
             group: 'Group 1',
             items: [
@@ -76,15 +91,31 @@ define([
         ];
         
         try {
-          const multiselect = await getTemplateAsync('components/multiselect-groups');
+          const multiselect = await getTemplateAsync('components/multiselect');
+          const multiselectGroups = await getTemplateAsync('components/multiselect-groups');
+
           
           $('.widget-settings__desc-space').prepend(
             multiselect.render({
+              name: 'test-input',
               items,
-              selected: ['11', '12'],
+              selected: ['5', '9', '10'],
+            }),
+            multiselectGroups.render({
+              name: 'test-input2',
+              items: itemsGroups,
+              selected: ['1', '2', '3', '4', '5'],
             })
           );
           
+          setTimeout(() => {
+            const $input = $('input[name="test-input"]');
+
+            $input.val('1,2');
+
+            self.Multiselect.trigger('component:change', $input.get(0));
+          }, 3000);
+
         } catch (error) {
           console.debug(error);
         }
@@ -93,12 +124,14 @@ define([
       },
       bind_actions: () => {
         
+        self.Multiselect.initHandlers();
         self.MultiselectGroups.initHandlers();
         
         return true;
       },
       destroy: () => {
         
+        self.Multiselect.destroyHandlers();
         self.MultiselectGroups.destroyHandlers();
         
         return true;

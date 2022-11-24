@@ -1,12 +1,13 @@
 {# 
   name - string - Name инпута для использования в форме
+  class_name - string - Класс для кастомизации
   items - array of objects - Массив со значениями селекта
-  selected - json string of array - Массив со значениями селекта в json строке
+  selected - string of array - Массив со значениями селекта в json строке
   disabled - boolean - Неактивность
   placeholder - string - Плэйсхолдер
 #}
 
-<div class="input-multiselect js-component-multiselect-groups" {{ disabled ? 'disabled' : '' }}>
+<div class="input-multiselect js-component-multiselect-groups {{ class_name ? class_name : '' }}" {{ disabled ? 'disabled' : '' }}>
   <input class="js-component-multiselect-groups-value" name="{{ name ? name : '' }}" type="hidden" value="{{ selected|length > 0 ? selected|join(',') : '' }}">
   <div class="input-multiselect--selected js-component-multiselect--values">
     <div class="input-multiselect--placeholder {{ selected|length > 0 ? 'hidden' : '' }} ">{{ placeholder ? placeholder : 'Выбрать...' }}</div>

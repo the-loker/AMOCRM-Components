@@ -39,7 +39,7 @@
     position: absolute;
     top: 40px;
     left: 0;
-    border: 1px solid #dbdedf;
+    outline: 1px solid #dbdedf;
     border-radius: 3px;
     background-color: #fff;
     z-index: 9999;
@@ -63,6 +63,21 @@
     max-height: 200px;
     overflow: hidden;
     overflow-y: auto;
+
+    &--items {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      & li {
+        position: relative;
+        padding: 5px 20px;
+
+        &:hover {
+          background-color: #efefef;
+        }
+      }
+    }
 
     &__group {
       button {
