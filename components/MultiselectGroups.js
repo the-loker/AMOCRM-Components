@@ -233,7 +233,7 @@ define([], function() {
 
       input.setAttribute('value', values ? values.join(',') : '');
 
-      this.trigger('change', valueInput);
+      this.trigger('change', input);
     }
 
     removeSelectedValue(e) {
