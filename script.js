@@ -2,10 +2,12 @@ define([
   'jquery',
   './components/MultiselectGroups.js?v=' + Date.now(),
   './components/Multiselect.js?v=' + Date.now(),
-], function($, MultiselectGroups, Multiselect) {
+  './components/Select.js?v=' + Date.now(),
+], function($, MultiselectGroups, Multiselect, Select) {
   return function() {
     const self = this;
 
+    self.Select = new Select();
     self.Multiselect = new Multiselect();
     self.MultiselectGroups = new MultiselectGroups();
 
@@ -55,6 +57,7 @@ define([
           { id: '8', option: 'Option 8' },
           { id: '9', option: 'Option 9' },
           { id: '10', option: 'Option 10' },
+          { id: '11', option: 'Option 11' },
         ];
         
         const itemsGroups = [
@@ -93,14 +96,23 @@ define([
         try {
           const multiselect = await getTemplateAsync('components/multiselect');
           const multiselectGroups = await getTemplateAsync('components/multiselect-groups');
+          const select = await getTemplateAsync('components/select');
 
           
           $('.widget-settings__desc-space').prepend(
+            '<div style="margin-bottom: 10px;">' +
+            select.render({
+              name: 'www',
+              items,
+              selected: '1',
+              search: true
+            }) +
+            '</div><div style="margin-bottom: 10px;">' +
             multiselect.render({
               name: 'test-input',
               items,
-              selected: ['5', '9', '10'],
-            }),
+            }) +
+            '</div><div style="margin-bottom: 10px;">' +
             multiselectGroups.render({
               name: 'test-input2',
               items: itemsGroups,
@@ -108,13 +120,13 @@ define([
             })
           );
           
-          setTimeout(() => {
-            const $input = $('input[name="test-input"]');
+          // setTimeout(() => {
+          //   const $input = $('input[name="www"]');
 
-            $input.val('1,2');
+          //   $input.val('2');
 
-            self.Multiselect.trigger('component:change', $input.get(0));
-          }, 3000);
+          //   self.Select.trigger('component:change', $input.get(0));
+          // }, 3000);
 
         } catch (error) {
           console.debug(error);
@@ -123,14 +135,14 @@ define([
         return true;
       },
       bind_actions: () => {
-        
+        self.Select.initHandlers();
         self.Multiselect.initHandlers();
         self.MultiselectGroups.initHandlers();
         
         return true;
       },
       destroy: () => {
-        
+        self.Select.destroyHandlers();
         self.Multiselect.destroyHandlers();
         self.MultiselectGroups.destroyHandlers();
         

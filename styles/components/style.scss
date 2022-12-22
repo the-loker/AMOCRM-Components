@@ -1,4 +1,4 @@
-.input-multiselect {
+.input-multiselect, .input-select {
   min-width: 200px;
   position: relative;
   border: 1px solid #dbdedf;
@@ -56,6 +56,22 @@
       top: -5px;
       left: 50%;
       margin-left: -10px;
+    }
+
+    &-search {
+      margin: 10px 20px;
+
+      input {
+        width: calc(100% - 20px);
+        padding: 5px 10px;
+        border: 1px solid #dbdedf;
+        border-radius: 4px;
+      }
+
+      .search-not-found {
+        padding: 5px 10px;
+        color: rgb(228, 31, 31);
+      }
     }
   }
 

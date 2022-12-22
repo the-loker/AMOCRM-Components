@@ -1,0 +1,64 @@
+{# 
+  name - string - Name инпута для использования в форме
+  class_name - string - Класс для кастомизации
+  items - array of objects - Массив со значениями селекта
+  selected - string - id элемента из массива items
+  disabled - boolean - Неактивность
+  placeholder - string - Плэйсхолдер
+  search - boolean - поиск по элементам списка
+#}
+
+<div class="input-select js-component-select {{ class_name ? class_name : '' }}" {{ disabled ? 'disabled' : '' }}>
+  <input class="js-component-select-value" name="{{ name ? name : '' }}" type="hidden" value="{{ selected ? selected : '' }}">
+  <div class="input-select--selected js-component-select--value">
+    <div class="input-select--placeholder {{ selected ? 'hidden' : '' }}">{{ placeholder ? placeholder : 'Выбрать...' }}</div>
+    {% if selected %}
+      {% set optionId = false %}
+      {% set optionName = false %}
+      {% for item in items %}
+        {% if item.id == selected %}
+          {% set optionId = item.id %}
+          {% set optionName = item.option %}
+        {% endif %}
+      {% endfor %}
+
+      {% if optionId %}
+        <div data-id="{{ optionId }}" class="selected-value">
+          <div class="selected-value--text">{{ optionName ? optionName : 'Not found' }}</div>
+          <div class="selected-value--btn-container">
+            <button
+              class="selected-value-button js-component-select--remove"
+              type="button"
+            >&times;</button>
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+  <div class="input-select--list js-component-select-list hidden">
+    <div class="input-select--list-search {{ search ? '' : 'hidden' }}">
+      <input class="js-component-select-list-search" type="text" placeholder="Поиск значений...">
+      <div class="search-not-found hidden js-component-select-list-search-message">Значений не найдено.</div>
+    </div>
+    <div class="input-select--list-container">
+      <ul class="input-select--list-container--items">
+        {% if items|length > 0%}
+          {% for item in items %}
+            {% if selected %}
+              {% set is_selected = false %}
+                {% if selected == item.id %}
+                  {% set is_selected = true %}
+                {% endif %}
+            {% endif %}
+            <li
+              data-value="{{ item.id }}"
+              class="js-component-select-item {{ is_selected ? 'selected' : '' }}"
+            >{{ item.option }}</li>
+          {% endfor %}
+        {% else %}
+          <p style="padding: 10px;">Значения не переданы.</p>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>
