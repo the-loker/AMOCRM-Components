@@ -1,4 +1,5 @@
 {# 
+  id - id контейнера
   name - string - Name инпута для использования в форме
   class_name - string - Класс для кастомизации
   items - array of objects - Массив со значениями селекта
@@ -8,7 +9,7 @@
   search - boolean - поиск по элементам списка
 #}
 
-<div class="input-select js-component-select {{ class_name ? class_name : '' }}" {{ disabled ? 'disabled' : '' }}>
+<div {{ id ? 'id="' ~ id ~ '"' : '' }} class="input-select js-component-select {{ class_name ? class_name : '' }}" {{ disabled ? 'disabled' : '' }}>
   <input class="js-component-select-value" name="{{ name ? name : '' }}" type="hidden" value="{{ selected ? selected : '' }}">
   <div class="input-select--selected js-component-select--value">
     <div class="input-select--placeholder {{ selected ? 'hidden' : '' }}">{{ placeholder ? placeholder : 'Выбрать...' }}</div>

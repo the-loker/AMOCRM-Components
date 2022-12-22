@@ -1,4 +1,5 @@
 {# 
+  id - id контейнера
   name - string - Name инпута для использования в форме
   class_name - string - Класс для кастомизации
   items - array of objects - Массив со значениями селекта
@@ -7,7 +8,7 @@
   placeholder - string - Плэйсхолдер
 #}
 
-<div class="input-multiselect js-component-multiselect {{ class_name ? class_name : '' }}" {{ disabled ? 'disabled' : '' }}>
+<div {{ id ? 'id="' ~ id ~ '"' : '' }} class="input-multiselect js-component-multiselect {{ class_name ? class_name : '' }}" {{ disabled ? 'disabled' : '' }}>
   <input class="js-component-multiselect-value" name="{{ name ? name : '' }}" type="hidden" value="{{ selected|length > 0 ? selected|join(',') : '' }}">
   <div class="input-multiselect--selected js-component-multiselect--values">
     <div class="input-multiselect--placeholder {{ selected|length > 0 ? 'hidden' : '' }}">{{ placeholder ? placeholder : 'Выбрать...' }}</div>

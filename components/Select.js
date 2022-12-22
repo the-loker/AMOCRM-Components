@@ -102,6 +102,12 @@ define(['underscore'], function(_) {
         return;
       }
 
+      if(!e.target.classList.contains('js-component-select-list-search')) {
+        // Отчистим строку поиска
+        const searchInput = component.querySelector(this.searchInput);
+        this.resetSearch(searchInput);
+      }
+
       // Отчистим строку поиска
       const searchInput = component.querySelector(this.searchInput);
       this.resetSearch(searchInput);
