@@ -7,6 +7,7 @@
   disabled - boolean - Неактивность
   placeholder - string - Плэйсхолдер
   search - boolean - поиск по элементам списка
+  search_placeholder - Плэйсхолдер строки поиска
 #}
 
 <div {{ id ? 'id="' ~ id ~ '"' : '' }} class="input-select js-component-select {{ class_name ? class_name : '' }}" {{ disabled ? 'disabled' : '' }}>
@@ -38,7 +39,7 @@
   </div>
   <div class="input-select--list js-component-select-list hidden">
     <div class="input-select--list-search {{ search ? '' : 'hidden' }}">
-      <input class="js-component-select-list-search" type="text" placeholder="Поиск значений...">
+      <input class="js-component-select-list-search" type="text" placeholder="{{ search_placeholder ? search_placeholder : 'Поиск значений...' }}">
       <div class="search-not-found hidden js-component-select-list-search-message">Значений не найдено.</div>
     </div>
     <div class="input-select--list-container">
