@@ -191,7 +191,9 @@ define(['underscore'], function(_) {
       }
 
       options.forEach(option => {
-        if(option.innerText.includes(value)) {
+        const optionText = option.innerText.toLowerCase();
+
+        if(optionText.includes(value.toLowerCase())) {
           option.classList.remove('hidden');
         } else {
           option.classList.add('hidden');
